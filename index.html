@@ -1,48 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SVG to ICO Converter</title>
-</head>
-<body>
-  <h1>SVG to ICO Converter</h1>
-  <p>Use this tool to convert SVG files to ICO format.</p>
-  <form id="conversion-form">
-    <label for="file-input">Choose a file:</label><br>
-    <input type="file" id="file-input" name="file"><br>
-    <button type="button" id="convert-button">Convert</button>
-  </form> 
-  <script src="https://cdn.jsdelivr.net/npm/js-ico@1.1.3/dist/js-ico.min.js"></script>
-  <script>
-    document.getElementById('convert-button').addEventListener('click', function() {
-      // Get the file input field
-      var fileInput = document.getElementById('file-input');
-
-      // Create a new FileReader
-      var reader = new FileReader();
-
-      // Add an event listener for when the file has finished loading
-      reader.addEventListener('load', function() {
-        // Get the file data as a base64-encoded string
-        var fileData = reader.result;
-
-        // Convert the file from SVG to ICO format using the js-ico library
-        jsIco.toIco(fileData, function(error, icoData) {
-          if (error) {
-            console.error(error);
-            return;
-          }
-
-          // Download the ICO file
-          var a = document.createElement('a');
-          a.href = icoData;
-          a.download = 'converted.ico';
-          a.click();
-        });
-      });
-
-      // Start reading the file
-      reader.readAsDataURL(fileInput.files[0]);
-    });
-  </script>
+  <head>
+    <title>Image Converter in Javascript</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+      <div class="container">
+          <br>
+          <h1 class="text-center">Image Converter in Javascript</h1>
+          <br>
+          <form id="myForm" enctype="multipart/form-data">
+              <div class="form-group">
+                  <label for="fileurl">Image URL:</label>
+                  <input type="text" id="url" placeholder="URL" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label for="image">Select Image:</label>
+                  <input type="file" id="image" class="form-control">
+                  <img style="display: none;" id="selectedImage"/>
+              </div>
+              <div class="form-group">
+                <label for="format">Select Format:</label>
+                <select class="form-control" id="format">
+                  <option>JPEG</option>
+                  <option>PNG</option>
+                  <option>GIF</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <button class="btn btn-danger btn-block">
+                      Convert Image
+                  </button>
+              </div>
+          </form>
+      </div>
 </body>
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-converter@0.1.1/dist/index.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="script.js"></script>
 </html>
